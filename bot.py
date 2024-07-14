@@ -1,6 +1,8 @@
 import asyncio
 import logging
 import sys
+import os
+from dotenv import load_dotenv
 
 from aiogram import Bot, Dispatcher, Router
 from aiogram.client.default import DefaultBotProperties
@@ -24,7 +26,7 @@ import instaloader
 
 
 
-
+load_dotenv()
 
 
 
@@ -33,7 +35,7 @@ import instaloader
 L = instaloader.Instaloader()
 
 
-cred = credentials.Certificate("D:\Projects\python-test\data-py-bot-firebase.json")
+cred = credentials.Certificate("/etc/secrets/data-py-bot-firebase.json")
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://data-py-bot-default-rtdb.europe-west1.firebasedatabase.app'
 })
@@ -42,7 +44,7 @@ ref = db.reference('/')
 
 
 
-TOKEN = "7434485445:AAHBzLz0qLU_Iiy5UdimUH7SXloByRRRTV0"
+TOKEN = os.getenv('TOKEN')
 
 
 class Form(StatesGroup):
